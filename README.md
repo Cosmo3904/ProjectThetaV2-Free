@@ -6,8 +6,8 @@ Install the yeezytstar font to make it look pretty.
 
 Working:
 
-Captcha Harvester
+Captcha Harvester, Captcha Engine
 
 Not:
 
-Everything else.
+Bot
