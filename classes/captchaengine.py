@@ -26,7 +26,12 @@ class antiCaptcha(QtCore.QThread):
             payload = {
                 'g-recaptcha-response' : job.get_solution_response()
             }
-            self.s.post('http://127.0.0.1:5000/solve', data = payload)
+            while True:
+                try:
+                    self.s.post('http://127.0.0.1:5000/solve', data = payload)
+                    break
+                except:
+                    print('Please Start Captcha Harvester. (THIS STORES THE TOKENS.)')
             print('Submitted Anti-Captcha')
 
 class twoCaptcha(QtCore.QThread):
@@ -46,7 +51,12 @@ class twoCaptcha(QtCore.QThread):
             payload = {
                 'g-recaptcha-response' : key
             }
-            self.s.post('http://127.0.0.1:5000/solve', data = payload)
+            while True:
+                try:
+                    self.s.post('http://127.0.0.1:5000/solve', data = payload)
+                    break
+                except:
+                    print('Please Start Captcha Harvester. (THIS STORES THE TOKENS.)')
             print('Submitted 2Captcha')
 
 class Ui_Dialog(object):
