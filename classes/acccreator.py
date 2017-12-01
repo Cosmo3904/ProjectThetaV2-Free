@@ -26,7 +26,7 @@ class createAccounts(QtCore.QThread):
         for item in emaillist:
             password = random.choice(self.firstnames) + random.choice(self.lastnames) + str(random.randint(0,9999))
             if createv2(random.choice(self.firstnames), random.choice(self.lastnames), item, password):
-                print('Account Generated')
+                print('Account Generated : ' + item + ':' + password)
                 accounts.write(item + ':' + password + '\n')
             else:
                 print('Failed to Create Account')
@@ -106,6 +106,7 @@ class Ui_dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "/// Account Creator"))
         self.boxType.setItemText(0, _translate("Dialog", "Gmail"))
         self.boxType.setItemText(1, _translate("Dialog", "Catch All"))
         self.txtEmail.setText(_translate("Dialog", "Gmail / Domain"))
