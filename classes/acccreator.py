@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import random
-from classes.createadidas import createaccount
+from classes.createadidas import createaccount, createv2
 
 class createAccounts(QtCore.QThread):
     def __init__(self, email, style, maxcount):
@@ -25,7 +25,7 @@ class createAccounts(QtCore.QThread):
             accounts = open('accounts.txt', 'w')
         for item in emaillist:
             password = random.choice(self.firstnames) + random.choice(self.lastnames) + str(random.randint(0,9999))
-            if createaccount(random.choice(self.firstnames), random.choice(self.lastnames), item, password):
+            if createv2(random.choice(self.firstnames), random.choice(self.lastnames), item, password):
                 print('Account Generated')
                 accounts.write(item + ':' + password + '\n')
             else:
