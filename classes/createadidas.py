@@ -1,6 +1,53 @@
 import requests
 from bs4 import BeautifulSoup as bs
 from classes.fetchtoken import main as fetchtoken
+
+def createv2(first, last, email, password):
+    try:
+        s = requests.Session()
+        s.headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36'
+        headers = {
+            'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'Accept-Encoding':'gzip, deflate, br',
+            'Accept-Language':'en-US,en;q=0.9',
+            'Cache-Control':'max-age=0',
+            'Connection':'keep-alive',
+            'Content-Length':'580',
+            'Content-Type':'application/x-www-form-urlencoded',
+            'DNT':'1',
+            'Host':'shop.miteam.adidas.us',
+            'Origin':'https://shop.miteam.adidas.us',
+            'Referer':'https://shop.miteam.adidas.us/miadidas-miteam/Logout.action',
+            'Upgrade-Insecure-Requests':'1'
+        }
+        res = s.get('http://www.miteam.adidas.us/on/demandware.store/Sites-miTeam-Site/en_US/Home-Show')
+        res = s.get('https://shop.miteam.adidas.us/miadidas-miteam/Logout.action')
+        soup = bs(res.text, 'lxml')
+        payload = {
+            'registerUser' : soup.find('input', {'name':'registerUser'})['value'],
+            'sourcePath' : soup.find('input', {'name':'sourcePath'})['value'],
+            'recipeIdent' : soup.find('input', {'name':'recipeIdent'})['value'],
+            'orderId' : soup.find('input', {'name':'orderId'})['value'],
+            'minAge' : soup.find('input', {'name':'minAge'})['value'],
+            'userVO.userAuthentication.regFirstName' : first,
+            'userVO.userAuthentication.regLastName' : last,
+            'userVO.userAuthentication.regLogin' : email,
+            'userVO.userAuthentication.regPassword' : password,
+            'userVO.userAuthentication.confrmPassword' : password,
+            'userVO.newsUpdate' : 'false',
+            'agree' : 'true',
+            'userVO.dateVO.day' : '1',
+            'userVO.dateVO.month' : '1',
+            'userVO.dateVO.year' : '1953',
+            '_sourcePage' : soup.find('input', {'name':'_sourcePage'})['value'],
+            '__fp' : soup.find('input', {'name':'__fp'})['value']
+        }
+        res = s.post('https://shop.miteam.adidas.us/miadidas-miteam/Login.action', data = payload, headers = headers)
+        return(True)
+    except:
+        return(False)
+
+
 def createaccount(first, last, email, password):
     try:
         s = requests.Session()
