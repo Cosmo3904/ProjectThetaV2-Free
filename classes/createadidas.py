@@ -46,8 +46,10 @@ def createv2(first, last, email, password):
         if login(email, password):
             return(True)
         else:
+            print('Error : Failed Logging In')
             return(False)
-    except:
+    except Exception as f:
+        print('Error : ' + f)
         return(False)
 
 
