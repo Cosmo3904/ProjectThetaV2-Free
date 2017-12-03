@@ -1,7 +1,7 @@
 # ProjectThetaV2-Free
 
 ## INSTALL THE FONT FILE FIRST OR NOTHING WILL LOOK RIGHT
-## Before first run of the script run the following command : pip3 install pyqt5, requests, flask, threading, python_anticaptcha
+## Before first run of the script run the following command : pip3 install pyqt5, requests, flask, threading, python_anticaptcha, lxml
 
 ## Captcha Harvester
 The captcha harvester starts a web server on port 5000 using your local IP address. You can view this webpage by going to http://127.0.0.1:5000/solve however it's likely you will get the error 'localhost is not a supported domain' or something of the sort. To fix this you need to append your hosts file. On windows, this file is located in the directory 'C:\Windows\System32\drivers\etc\hosts'. On linux or osx, this file is located in the directory '/etc/hosts'. To append this file you will open your hosts file and add '127.0.0.1    dev.adidas.com' for adidas to the end of the file (and if you're harvesting for a different website just follow that format, for example supremenewyork would be '127.0.0.1    dev.supremenewyork.com'). After you've done this, the webpage you added to your hosts will now take place of 127.0.0.1 in the previous url EG: http://dev.adidas.com:5000/solve. After solving tokens, the successfully created tokens will be stored in the webpage http://127.0.0.1:5000/tokens. All tokens expire after 110 seconds because recaptcha tokens are only valid for 2 minutes. 
