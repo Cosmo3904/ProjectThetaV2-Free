@@ -25,7 +25,7 @@ class createAccounts(QtCore.QThread):
             accounts = open('accounts.txt', 'w')
         for item in emaillist:
             password = random.choice(self.firstnames) + random.choice(self.lastnames) + str(random.randint(0,9999))
-            if createv2(random.choice(self.firstnames), random.choice(self.lastnames), item, password):
+            if createaccount(random.choice(self.firstnames), random.choice(self.lastnames), item, password):
                 print('Account Generated : ' + item + ':' + password)
                 accounts.write(item + ':' + password + '\n')
             else:
