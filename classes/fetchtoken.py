@@ -7,7 +7,7 @@ def main():
     s = requests.Session()
     while True:
         try:
-            res = s.get('127.0.0.1:5000/json')
+            res = s.get('http://127.0.0.1:5000/json')
             break
         except:
             pass
@@ -21,7 +21,7 @@ def main():
             index = 0
             while True:
                 try:
-                    res = s.get('127.0.0.1:5000/json')
+                    res = s.get('http://127.0.0.1:5000/json')
                     break
                 except:
                     pass
