@@ -123,7 +123,8 @@ def createaccount(first, last, email, password):
             return(True)
         else:
             return(False)
-    except:
+    except Exception as f:
+        print('Error : ' + f)
         return(False)
 
 def login(email, passw):
