@@ -73,6 +73,7 @@ def createaccount(first, last, email, password):
         }
         res = s.get('https://cp.adidas.com/web/eCom/en_US/loadcreateaccount')
         soup = bs(res.text, 'lxml')
+        recaptoken = fetchtoken()
         payload = {
             'firstName' : first,
             'lastName' : last,
@@ -84,7 +85,7 @@ def createaccount(first, last, email, password):
             '_amf' : 'on',
             'terms' : 'true',
             '_terms' : 'on',
-            'g-recaptcha-response' : fetchtoken(),
+            'g-recaptcha-response' : recaptoken,
             'metaAttrs[pageLoadedEarlier]':'true',
             'app':'eCom',
             'locale':'en_US',
@@ -117,12 +118,7 @@ def createaccount(first, last, email, password):
         resumeurldata2 = 'eCom|en_US|cp.adidas.com|null'.replace('|', '%7C')
         geturl = res.text[res.text.find('https://cp.adidasspecialty'):res.text.find('ssoiniturl')+32].replace('amp;','')
         res = s.get('https://cp.adidas.com/web/ssoCookieCreate?' + resumeurldata + '&' + resumeurldata2, headers = headers)
-        res = s.get(geturl)
-        res = s.get('https://cp.adidas.com' + resumeurl)
-        if login(email, password):
-            return(True)
-        else:
-            return(False)
+        return(True)
     except Exception as f:
         print('Error : ' + f)
         return(False)
