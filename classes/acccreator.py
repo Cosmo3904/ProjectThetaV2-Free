@@ -19,18 +19,18 @@ class createAccounts(QtCore.QThread):
             while count < int(self.maxcount):
                 emaillist.append(random.choice(self.firstnames) + random.choice(self.lastnames) + str(random.randint(0,9999)) + '@' + self.email)
                 count += 1
-        try:
-            accounts = open('accounts.txt', 'a')
-        except:
-            accounts = open('accounts.txt', 'w')
         for item in emaillist:
+            try:
+                accounts = open('accounts.txt', 'a')
+            except:
+                accounts = open('accounts.txt', 'w')
             password = random.choice(self.firstnames) + random.choice(self.lastnames) + str(random.randint(0,9999))
             if createaccount(random.choice(self.firstnames), random.choice(self.lastnames), item, password):
                 print('Account Generated : ' + item + ':' + password)
                 accounts.write(item + ':' + password + '\n')
             else:
                 print('Failed to Create Account')
-        accounts.close()
+            accounts.close()
         print('Accounts Available in accounts.txt')
 
     def dot_trick(self, username):
