@@ -254,7 +254,14 @@ class adiCart(QtCore.QThread):
             if self.s.atcwrecaptcha(self.sku, self.size):
                 break
             else:
-                self.status.emit(['Failed Cart, Retrying...', self.height])
+                self.status.emit(['Failed Cart, Checking Stock...', self.height])
+                while True:
+                    checkstock = self.s.checkstock(self.sku, self.size)
+                    if checkstock:
+                        break
+                    else:
+                        self.status.emit(['OOS, Waiting', self.height])
+                        time.sleep(5)
         self.status.emit(['Carted', self.height])
         self.s.opencart()
         self.s.chrome.get('https://www.adidas.com/on/demandware.store/Sites-adidas-US-Site/en_US/Cart-Show')
