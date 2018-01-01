@@ -212,7 +212,7 @@ class Ui_Dialog(object):
     def starttask(self):
         height = self.tableTasks.rowCount()
         index = 0
-        starttime = datetime.strptime(self.timeStart.text(), '%I:%M %p')
+        starttime = datetime.strptime(datetime.now().strftime('%d-%b-%Y ') + self.timeStart.text(), '%d-%b-%Y %I:%M %p')
         while index < height:
             self.threads[index] = adiCart(self.tableTasks.item(index, 1).text(), self.tableTasks.item(index, 2).text(), self.tableTasks.item(index, 3).text(), starttime, index)
             self.threads[index].status.connect(self.updateTasks)
