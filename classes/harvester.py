@@ -31,7 +31,7 @@ def solve():
 
 @app.route('/sitekey', methods=['GET'])
 def sitekey():
-    return(render_template(sitekey))
+    return(render_template('sitekey.html', sitekey = sitekey))
 
 if __name__ == '__main__':
     try:
