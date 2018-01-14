@@ -29,6 +29,10 @@ def solve():
             Thread(target = tokenremoval, args = [token]).start()
     return(render_template('index.html', sitekey = sitekey))
 
+@app.route('/sitekey', methods=['GET'])
+def sitekey():
+    return(render_template(sitekey))
+
 if __name__ == '__main__':
     try:
         sitekey = argv[1]
